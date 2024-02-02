@@ -1,6 +1,5 @@
 package reader;
 
-import utils.UsedMemoryLogger;
 import utils.custom_collections.MapOrientedPriorityQueue;
 
 import java.io.*;
@@ -60,7 +59,6 @@ public class Chunks {
             throw new RuntimeException(e);
         }
 
-        UsedMemoryLogger.log();
         return getAsQueue(sortedChunkFiles);
     }
 
@@ -84,7 +82,6 @@ public class Chunks {
 
         collect.setOrienteer(orienteer);
 
-        UsedMemoryLogger.log();
         return collect;
     }
 }

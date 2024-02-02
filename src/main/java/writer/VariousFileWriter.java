@@ -1,6 +1,5 @@
 package writer;
 
-import utils.UsedMemoryLogger;
 import utils.custom_collections.MapOrientedPriorityQueue;
 import writer.writer_interfaces.JSONWrite;
 import writer.writer_interfaces.TXTWrite;
@@ -38,7 +37,6 @@ public abstract class VariousFileWriter implements JSONWrite, XMLWrite, TXTWrite
 
             writer.write("]}");
 
-            UsedMemoryLogger.log();
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -68,7 +66,6 @@ public abstract class VariousFileWriter implements JSONWrite, XMLWrite, TXTWrite
                 }
             }
 
-            UsedMemoryLogger.log();
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -101,7 +98,6 @@ public abstract class VariousFileWriter implements JSONWrite, XMLWrite, TXTWrite
 
             writer.write("</list>");
 
-            UsedMemoryLogger.log();
 
         } catch (IOException e) {
             throw new RuntimeException(e);
