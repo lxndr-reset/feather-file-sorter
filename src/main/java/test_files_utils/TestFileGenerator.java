@@ -14,7 +14,7 @@ public class TestFileGenerator {
     public static File generate(String filename) {
         final long targetSize = 1024
                 * 1024
-//                * 1024
+                * 1024
                 / 80;
         if (filename.contains(".")) {
             throw new IllegalArgumentException("filename shouldn't contain extension");
