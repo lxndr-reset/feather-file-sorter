@@ -1,4 +1,4 @@
-package test_files_utils;
+package utils;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -14,14 +14,13 @@ public class TestFileGenerator {
     public static File generate(String filename) {
         final long targetSize = 1024
                 * 1024
-                * 1024
+//                * 1024
                 / 80;
         if (filename.contains(".")) {
             throw new IllegalArgumentException("filename shouldn't contain extension");
         }
 
         File file = new File(STR."\{filename}.txt");
-        BufferedWriter writer;
         try {
             if (!file.exists()) {
                 //noinspection ResultOfMethodCallIgnored
@@ -31,7 +30,6 @@ public class TestFileGenerator {
                     return file;
                 }
             }
-            writer = new BufferedWriter(new FileWriter(file));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -43,10 +41,12 @@ public class TestFileGenerator {
             futures.addLast(future);
         }
 
-        try (writer) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             for (CompletableFuture<String> future : futures) {
                 writer.write(future.get());
             }
+            Runtime runtime = Runtime.getRuntime();
+            System.out.println(STR."Memory used: \{(((float) runtime.totalMemory()) - runtime.freeMemory()) / 1024 / 1024 / 1024} gb");
             futures.clear();
         } catch (InterruptedException | ExecutionException | IOException e) {
             throw new RuntimeException(e);
