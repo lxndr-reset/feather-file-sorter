@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class StringFileManager {
     private final File file;
@@ -17,19 +16,18 @@ public class StringFileManager {
     }
 
     public List<String> getFileAsSortedListAsc() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            Stream<String> lines = reader.lines();
-
-            return lines.parallel().sorted().collect(Collectors.toList());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        return getSortedAs(Comparator.naturalOrder());
     }
-    public List<String> getFileAsSortedListDesc() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            Stream<String> lines = reader.lines();
 
-            return lines.parallel().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+    public List<String> getFileAsSortedListDesc() {
+        return getSortedAs(Comparator.reverseOrder());
+    }
+
+    private List<String> getSortedAs(Comparator<String> comparator) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            return reader.lines().parallel()
+                    .sorted(comparator)
+                    .collect(Collectors.toList());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
