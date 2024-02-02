@@ -21,7 +21,7 @@ public class VariousFileWriter implements JSONWrite, XMLWrite, TXTWrite {
         this.list = list;
     }
 
-    public void writeAsFiletype(FileType fileType) { //todo make switch using for
+    public void writeAsFiletype(FileType fileType) {
         file = new File(STR."output.\{fileType.type}");
         switch (fileType) {
             case TXT:
