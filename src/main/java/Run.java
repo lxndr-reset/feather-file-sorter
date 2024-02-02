@@ -6,8 +6,6 @@ import writer.FileType;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Locale;
 
 public class Run {
@@ -29,29 +27,6 @@ public class Run {
 
         File to = new File(STR."output.\{fileType.getType()}");
         new AutoWriter(fileType, to).autoWrite(readers);
-        System.out.println(isSorted(to));
     }
 
-    private static boolean isSorted(File file) {
-        if (!file.exists()) {
-            return false;
-        }
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String first = reader.readLine();
-            if (first == null) {
-                return true;
-            }
-
-            String second;
-            while ((second = reader.readLine()) != null) {
-                if (first.compareTo(second) >= 0) {
-                    return false;
-                }
-                first = second;
-            }
-            return true;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }

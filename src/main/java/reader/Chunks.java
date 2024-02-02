@@ -24,7 +24,7 @@ public class Chunks {
                 sortDirection == SortDirection.ASC ? Comparator.naturalOrder() : Comparator.reverseOrder()
         ).toList();
 
-        File chunkFile = File.createTempFile("sorted_chunk_", ".txt", new File("D:/chunks"));
+        File chunkFile = File.createTempFile("sorted_chunk_", ".txt");
         chunkFile.deleteOnExit();
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(chunkFile))) {
